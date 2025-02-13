@@ -11,6 +11,7 @@ export function LoginForm() {
         onSubmit={(value) => {
           console.log(value);
         }}
+        validateOnBlur={false}
       >
         <Form className="flex  flex-col justify-center  gap-7 rounded-2xl form">
           <legend className="text-white text-6xl text-center p-8 ">
@@ -66,6 +67,7 @@ export function LoginForm() {
               name="email"
               placeholder="E-Mail"
               className="bg-white self-center border-1 rounded-md p-1"
+              
             />
             <ErrorMessage
               name="email"
@@ -106,7 +108,7 @@ export function LoginForm() {
               placeholder="country"
               className="bg-white border-1 self-center rounded-md p-1 "
             >
-              <option value="red" >....Select....</option>
+              <option value="red">....Select....</option>
               <option value="India">India</option>
               <option value="USA">USA</option>
               <option value="Russia">Russia</option>
@@ -117,7 +119,12 @@ export function LoginForm() {
               render={(msg) => <div className="text-yellow-400">{msg}</div>}
             />
           </div>
-          <button type="submit" className="shadow-md hover:shadow-teal-100 border-white border-2 w-fit px-6 py-1 rounded-md text-white">Submit</button>
+          <button
+            type="submit"
+            className="shadow-md hover:shadow-teal-100 border-white border-2 w-fit px-6 py-1 rounded-md text-white"
+          >
+            Submit
+          </button>
         </Form>
       </Formik>
     </div>
