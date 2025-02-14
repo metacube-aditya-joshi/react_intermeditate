@@ -1,19 +1,21 @@
 import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage} from "formik";
 import { initalValues, validationSchema } from "../config/formConfig";
 import useTheme from "../context/ThemeContext";
 
 export function LoginForm() {
   const {theme} = useTheme();
+  
   return (
     <div className={theme=='dark'?"w-screen form bg-regal-blue  flex justify-center ":"w-screen    flex justify-center "}>
       <Formik
         initialValues={initalValues}
         validationSchema={Yup.object(validationSchema)}
-        onSubmit={(value) => {
-          console.log(value);
+        onSubmit={(values)=>{
+          console.log('values:'+values)
         }}
         validateOnBlur={false}
+        resetForm
       >
         <Form className="flex  flex-col justify-center  gap-7 rounded-2xl form">
         <legend className={theme == 'dark' ? 'text-6xl text-center p-8 text-white' :'text-6xl text-center p-8' }>
