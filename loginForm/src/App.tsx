@@ -1,9 +1,12 @@
 import { LoginForm } from "./components/LoginForm";
 import "./App.css";
+import { Routes, Route } from "react-router";
 import { ThemeProvider } from "./context/ThemeContext";
 import { useState } from "react";
 import ReactDOM from "react-dom";
-
+import Home from "./components/Home";
+import Dispaly from "./components/Dispaly";
+import Mode from "./components/Mode";
 function App() {
   const [theme, setTheme] = useState("light");
   const darkTheme = () => {
@@ -13,37 +16,19 @@ function App() {
     setTheme("light");
   };
 
-  const changeTheme = () => {
-    if (theme == "dark") {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  };
+ 
 
   return ReactDOM.createPortal(
     <>
       <ThemeProvider value={{ theme, lightTheme, darkTheme }}>
-        <div
-          className={
-            theme == "dark"
-              ? "bg-regal-blue p-2 flex justify-end"
-              : "p-2 flex justify-end"
-          }
-        >
-          <button
-            onClick={changeTheme}
-            className={
-              theme == "dark"
-                ? "shadow-md hover:shadow-teal-100  border-white border-2 w-fit px-6 py-1 rounded-md text-white"
-                : "shadow-md hover:shadow  border-2 w-fit px-6 py-1 rounded-md "
-            }
-          >
-            {" "}
-            {theme === "dark" ? "Light" : "Dark"}
-          </button>
-        </div>
-        <LoginForm />
+      <Mode theme={theme} setTheme={setTheme}/>
+        <Routes>
+          
+
+          <Route index element={<Home/>} />
+          <Route path="/login" element={<LoginForm />}/>
+          <Route path='/display' element={<Dispaly/>}/>
+        </Routes>
       </ThemeProvider>
     </>,
     document.getElementById("portal-root")

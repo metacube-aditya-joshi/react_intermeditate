@@ -1,39 +1,58 @@
 import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { initalValues, validationSchema } from "../config/formConfig";
 import useTheme from "../context/ThemeContext";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 import { updateFormData } from "../store/slice";
+import { NavLink } from "react-router";
+
 export function LoginForm() {
-  const {theme} = useTheme();
-  const dispatch= useDispatch();
+  const { theme } = useTheme();
+  const dispatch = useDispatch();
   return (
-    <div className={theme=='dark'?"w-screen form bg-regal-blue  flex justify-center ":"w-screen    flex justify-center "}>
+    <div
+      className={
+        theme == "dark"
+          ? "w-screen form bg-regal-blue h-screen flex justify-center "
+          : "w-screen  h-screen  flex justify-center "
+      }
+    >
+       
       <Formik
         initialValues={initalValues}
         validationSchema={Yup.object(validationSchema)}
-        onSubmit={(values)=>{
+        onSubmit={(values) => {
           const formattedData = {
             firstName: values.firstName.trim(),
             lastName: values.lastName.trim(),
             email: values.email.trim(),
             company: values.company.trim(),
             country: values.country,
-        };
-        dispatch(updateFormData(formattedData)); 
+          };
+          dispatch(updateFormData(formattedData));
         }}
         validateOnBlur={false}
         resetForm
       >
         <Form className="flex  flex-col justify-center  gap-7 rounded-2xl form">
-        <legend className={theme == 'dark' ? 'text-6xl text-center p-8 text-white' :'text-6xl text-center p-8' }>
+          <legend
+            className={
+              theme == "dark"
+                ? "text-6xl text-center p-8 text-white"
+                : "text-6xl text-center p-8"
+            }
+          >
             Contact Us
-        </legend>
-          
+          </legend>
+
           <div className="flex justify-between gap-2 ">
             <label
               htmlFor="firstName"
-              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
+              className={
+                theme == "dark"
+                  ? "text-white  text-2xl font-extrabold "
+                  : "text-2xl font-extrabold"
+              }
             >
               Enter First Name :
             </label>
@@ -45,14 +64,20 @@ export function LoginForm() {
             />
             <ErrorMessage
               name="firstName"
-              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
+              render={(msg) => (
+                <div className="dark:text-yellow-400 text-red-500">{msg}</div>
+              )}
             />
           </div>
 
           <div className="flex justify-between gap-2">
             <label
               htmlFor="lastName"
-              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
+              className={
+                theme == "dark"
+                  ? "text-white  text-2xl font-extrabold "
+                  : "text-2xl font-extrabold"
+              }
             >
               Enter Last Name :
             </label>
@@ -64,14 +89,20 @@ export function LoginForm() {
             />
             <ErrorMessage
               name="lastName"
-              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
+              render={(msg) => (
+                <div className="dark:text-yellow-400 text-red-500">{msg}</div>
+              )}
             />
           </div>
 
           <div className="flex justify-between gap-2">
             <label
               htmlFor="email"
-              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
+              className={
+                theme == "dark"
+                  ? "text-white  text-2xl font-extrabold "
+                  : "text-2xl font-extrabold"
+              }
             >
               Enter E-Mail :
             </label>
@@ -80,18 +111,23 @@ export function LoginForm() {
               name="email"
               placeholder="E-Mail"
               className="bg-white self-center border-1 rounded-md p-1"
-              
             />
             <ErrorMessage
               name="email"
-              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
+              render={(msg) => (
+                <div className="dark:text-yellow-400 text-red-500">{msg}</div>
+              )}
             />
           </div>
 
           <div className="flex justify-between gap-2">
             <label
               htmlFor="company"
-              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
+              className={
+                theme == "dark"
+                  ? "text-white  text-2xl font-extrabold "
+                  : "text-2xl font-extrabold"
+              }
             >
               Enter Company's Name :
             </label>
@@ -103,14 +139,20 @@ export function LoginForm() {
             />
             <ErrorMessage
               name="company"
-              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
+              render={(msg) => (
+                <div className="dark:text-yellow-400 text-red-500">{msg}</div>
+              )}
             />
           </div>
 
           <div className="flex justify-between gap-2 ">
             <label
               htmlFor="country"
-              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
+              className={
+                theme == "dark"
+                  ? "text-white  text-2xl font-extrabold "
+                  : "text-2xl font-extrabold"
+              }
             >
               Select Country :
             </label>
@@ -129,19 +171,34 @@ export function LoginForm() {
             </Field>
             <ErrorMessage
               name="country"
-              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
+              render={(msg) => (
+                <div className="dark:text-yellow-400 text-red-500">{msg}</div>
+              )}
             />
           </div>
-          <button
-            type="submit"
-            className={
-              theme == "dark"
-                ? "shadow-md hover:shadow-teal-100  border-white border-2 w-fit px-6 py-1 rounded-md text-white"
-                : "shadow-md hover:shadow  border-2 w-fit px-6 py-1 rounded-md "
-            }
-          >
-            Submit
-          </button>
+          <div className="flex gap-10">
+            <button
+              type="submit"
+              className={
+                theme == "dark"
+                  ? "shadow-md hover:shadow-teal-100  border-white border-2 w-fit px-6 py-1 rounded-md text-white"
+                  : "shadow-md hover:shadow  border-2 w-fit px-6 py-1 rounded-md "
+              }
+            >
+              Submit
+            </button>
+            <NavLink
+              to={"/"}
+              type="submit"
+              className={
+                theme == "dark"
+                  ? "shadow-md hover:shadow-teal-100  border-white border-2 w-fit px-6 py-1 rounded-md text-white"
+                  : "shadow-md hover:shadow  border-2 w-fit px-6 py-1 rounded-md "
+              }
+            >
+              Home
+            </NavLink>
+          </div>
         </Form>
       </Formik>
     </div>
