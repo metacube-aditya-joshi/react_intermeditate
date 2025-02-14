@@ -2,17 +2,25 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage} from "formik";
 import { initalValues, validationSchema } from "../config/formConfig";
 import useTheme from "../context/ThemeContext";
-
+import {useDispatch} from 'react-redux'
+import { updateFormData } from "../store/slice";
 export function LoginForm() {
   const {theme} = useTheme();
-  
+  const dispatch= useDispatch();
   return (
     <div className={theme=='dark'?"w-screen form bg-regal-blue  flex justify-center ":"w-screen    flex justify-center "}>
       <Formik
         initialValues={initalValues}
         validationSchema={Yup.object(validationSchema)}
         onSubmit={(values)=>{
-          console.log('values:'+values)
+          const formattedData = {
+            firstName: values.firstName.trim(),
+            lastName: values.lastName.trim(),
+            email: values.email.trim(),
+            company: values.company.trim(),
+            country: values.country,
+        };
+        dispatch(updateFormData(formattedData)); 
         }}
         validateOnBlur={false}
         resetForm

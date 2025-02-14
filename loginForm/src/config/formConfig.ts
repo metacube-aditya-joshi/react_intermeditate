@@ -6,7 +6,8 @@ const initalValues = {
   email: "",
   age: "",
   gender: "",
-  company:''
+  company:'',
+  country:'',
 };
  const validationSchema={
          firstName: Yup.string()
@@ -16,7 +17,8 @@ const initalValues = {
            .max(20, 'Must be 20 characters or less')
            .required('Required'),
          email: Yup.string().email('Invalid email address').required('Required'),
-         company:Yup.string().max(10,"Must be 10 Characters or less").required('Required')
+         company:Yup.string().max(10,"Must be 10 Characters or less").required('Required'),
+         country:Yup.string().required('Required')
        }
 
 
