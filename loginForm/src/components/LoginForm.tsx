@@ -1,10 +1,12 @@
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { initalValues, validationSchema } from "../config/formConfig";
+import useTheme from "../context/ThemeContext";
 
 export function LoginForm() {
+  const {theme} = useTheme();
   return (
-    <div className="w-screen h-screen bg-regal-blue flex justify-center ">
+    <div className={theme=='dark'?"w-screen form bg-regal-blue  flex justify-center ":"w-screen    flex justify-center "}>
       <Formik
         initialValues={initalValues}
         validationSchema={Yup.object(validationSchema)}
@@ -14,13 +16,14 @@ export function LoginForm() {
         validateOnBlur={false}
       >
         <Form className="flex  flex-col justify-center  gap-7 rounded-2xl form">
-          <legend className="text-white text-6xl text-center p-8 ">
+        <legend className={theme == 'dark' ? 'text-6xl text-center p-8 text-white' :'text-6xl text-center p-8' }>
             Contact Us
-          </legend>
+        </legend>
+          
           <div className="flex justify-between gap-2 ">
             <label
               htmlFor="firstName"
-              className="text-white text-2xl font-extrabold "
+              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
             >
               Enter First Name :
             </label>
@@ -28,18 +31,18 @@ export function LoginForm() {
               id="firstName"
               name="firstName"
               placeholder="First Name"
-              className="bg-white border-1 self-center rounded-md p-1"
+              className="bg-white  border-1 self-center rounded-md p-1"
             />
             <ErrorMessage
               name="firstName"
-              render={(msg) => <div className="text-yellow-400">{msg}</div>}
+              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
             />
           </div>
 
-          <div className="flex justify-between  gap-2">
+          <div className="flex justify-between gap-2">
             <label
               htmlFor="lastName"
-              className="text-white text-2xl font-extrabold"
+              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
             >
               Enter Last Name :
             </label>
@@ -51,14 +54,14 @@ export function LoginForm() {
             />
             <ErrorMessage
               name="lastName"
-              render={(msg) => <div className="text-yellow-400">{msg}</div>}
+              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
             />
           </div>
 
           <div className="flex justify-between gap-2">
             <label
               htmlFor="email"
-              className="text-white text-2xl font-extrabold "
+              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
             >
               Enter E-Mail :
             </label>
@@ -71,14 +74,14 @@ export function LoginForm() {
             />
             <ErrorMessage
               name="email"
-              render={(msg) => <div className="text-yellow-400">{msg}</div>}
+              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
             />
           </div>
 
           <div className="flex justify-between gap-2">
             <label
               htmlFor="company"
-              className="text-white text-2xl font-extrabold "
+              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
             >
               Enter Company's Name :
             </label>
@@ -90,14 +93,14 @@ export function LoginForm() {
             />
             <ErrorMessage
               name="company"
-              render={(msg) => <div className="text-yellow-400">{msg}</div>}
+              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
             />
           </div>
 
           <div className="flex justify-between gap-2 ">
             <label
               htmlFor="country"
-              className="text-white text-2xl font-extrabold "
+              className={theme == 'dark' ? "text-white  text-2xl font-extrabold ":"text-2xl font-extrabold"}
             >
               Select Country :
             </label>
@@ -116,12 +119,16 @@ export function LoginForm() {
             </Field>
             <ErrorMessage
               name="country"
-              render={(msg) => <div className="text-yellow-400">{msg}</div>}
+              render={(msg) => <div className="dark:text-yellow-400 text-red-500">{msg}</div>}
             />
           </div>
           <button
             type="submit"
-            className="shadow-md hover:shadow-teal-100 border-white border-2 w-fit px-6 py-1 rounded-md text-white"
+            className={
+              theme == "dark"
+                ? "shadow-md hover:shadow-teal-100  border-white border-2 w-fit px-6 py-1 rounded-md text-white"
+                : "shadow-md hover:shadow  border-2 w-fit px-6 py-1 rounded-md "
+            }
           >
             Submit
           </button>
