@@ -1,31 +1,30 @@
 import {createSlice} from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface FormState{
+export interface SubmissionData {
     firstName:string,
     lastName:string,
     email:string,
     company:string,
     country:string
 }
-const initialState:FormState={
-    firstName:" ",
-    lastName:'',
-    email:'',
-    company:'',
-    country:''
+interface FormState {
+    submissions: SubmissionData [];
 }
+const initialState: FormState = {
+    submissions: [],
+};
 
 
-export const formSlice= createSlice({
-    name:'formData',
+export const formSlice = createSlice({
+    name: 'formData',
     initialState,
-    reducers:{
-        updateFormData: (state, action: PayloadAction<FormState>) => {
-            return { ...state, ...action.payload }; 
-        }
-    }
-})
+    reducers: {
+        addFormSubmission: (state, action: PayloadAction<SubmissionData >) => {
+            state.submissions.push(action.payload);
+        },
+    },
+});
 
-export const {updateFormData} = formSlice.actions;
+export const { addFormSubmission } = formSlice.actions;
 export default formSlice.reducer;

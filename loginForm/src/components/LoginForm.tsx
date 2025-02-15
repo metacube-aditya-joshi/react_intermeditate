@@ -3,10 +3,12 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { initalValues, validationSchema } from "../config/formConfig";
 import useTheme from "../context/ThemeContext";
 import { useDispatch } from "react-redux";
-import { updateFormData } from "../store/slice";
+import { addFormSubmission } from "../store/slice";
 import { NavLink } from "react-router";
+import { useNavigate } from "react-router";
 
 export function LoginForm() {
+  const navigate = useNavigate();
   const { theme } = useTheme();
   const dispatch = useDispatch();
   return (
@@ -29,7 +31,8 @@ export function LoginForm() {
             company: values.company.trim(),
             country: values.country,
           };
-          dispatch(updateFormData(formattedData));
+          dispatch(addFormSubmission(formattedData));
+          navigate('/');
         }}
         validateOnBlur={false}
         resetForm
