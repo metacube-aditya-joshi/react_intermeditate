@@ -6,8 +6,10 @@ import { useDispatch } from "react-redux";
 import { addFormSubmission } from "../store/slice";
 import { NavLink } from "react-router";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 export function LoginForm() {
+  const backend_url = "http://localhost:3000/data";
   const navigate = useNavigate();
   const { theme } = useTheme();
   const dispatch = useDispatch();
@@ -19,7 +21,6 @@ export function LoginForm() {
           : "w-screen  h-screen  flex justify-center "
       }
     >
-       
       <Formik
         initialValues={initalValues}
         validationSchema={Yup.object(validationSchema)}
@@ -31,8 +32,16 @@ export function LoginForm() {
             company: values.company.trim(),
             country: values.country,
           };
+          axios
+            .post(backend_url, formattedData)
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           dispatch(addFormSubmission(formattedData));
-          navigate('/');
+          navigate("/");
         }}
         validateOnBlur={false}
         resetForm
