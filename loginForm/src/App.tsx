@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 import Home from "./components/Home";
 import Dispaly from "./components/Dispaly";
 import Mode from "./components/Mode";
+import ErrorBoundary from './components/ErrorBoundary.tsx'; 
 function App() {
   const [theme, setTheme] = useState("light");
   const darkTheme = () => {
@@ -21,6 +22,7 @@ function App() {
   return ReactDOM.createPortal(
     <>
       <ThemeProvider value={{ theme, lightTheme, darkTheme }}>
+      <ErrorBoundary>
       <Mode theme={theme} setTheme={setTheme}/>
         <Routes>
           
@@ -29,7 +31,9 @@ function App() {
           <Route path="/login" element={<LoginForm />}/>
           <Route path='/display' element={<Dispaly/>}/>
         </Routes>
+        </ErrorBoundary>
       </ThemeProvider>
+
     </>,
     document.getElementById("portal-root")
   );
